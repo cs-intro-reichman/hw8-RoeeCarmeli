@@ -63,14 +63,11 @@
     public boolean removeFollowee(String name) {
         for (int i = 0; i < fCount; i++){
             if (follows[i].equals(name)) {
-                if (i == fCount - 1) {
-                    follows[i] = null;
-                    fCount--;
-                    return true;
+                for (int j = i; j < fCount - 1; j++) {
+                    follows[j] = follows[j + 1];
                 }
-                follows[i] = follows[fCount];
-                follows[fCount] = null;
-                fCount--;
+                follows[fCount - 1] = null;
+                fCount--; 
                 return true;
             }
         }
