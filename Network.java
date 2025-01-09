@@ -29,7 +29,9 @@ public class Network {
      *  If there is no such user, returns null.
      *  Notice that the method receives a String, and returns a User object. */
     public User getUser(String name) {
-        //// Replace the following statement with your code
+        for(int i = 0; i < userCount; i++){
+            if (users[i].getName().equals(name)) return users[i];
+        }
         return null;
     }
 
@@ -38,7 +40,12 @@ public class Network {
     *  If the given name is already a user in this network, does nothing and returns false;
     *  Otherwise, creates a new user with the given name, adds the user to this network, and returns true. */
     public boolean addUser(String name) {
-        //// Replace the following statement with your code
+        if (userCount == users.length) return false;
+        if (getUser(name) == null) {
+            users[userCount] = new User(name);
+            userCount++;
+            return true;
+        }
         return false;
     }
 
@@ -46,7 +53,10 @@ public class Network {
      *  If any of the two names is not a user in this network,
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
-        //// Replace the following statement with your code
+        if (getUser(name1) != null && getUser(name2) != null) {
+            return getUser(name1).addFollowee(name2);
+        }
+        
         return false;
     }
     
@@ -73,7 +83,10 @@ public class Network {
 
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
-       //// Replace the following statement with your code
-       return null;
+       String ans = "Network: \n";
+       for(int i = 0; i<userCount; i++){
+        ans += users[i].toString() + "\n";
+       }
+       return ans;
     }
 }
